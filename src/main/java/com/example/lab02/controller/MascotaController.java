@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/mascota")
 public class MascotaController {
@@ -84,4 +86,34 @@ public class MascotaController {
         }
         return "redirect:/mascota/list";
     }
+
+    @GetMapping("/buscar")
+    public String buscarMascotas(
+            @RequestParam(required = false) String criterio,   // Criterio de búsqueda (nombre, especie, estado)
+            @RequestParam(required = false) String valorBusqueda, // Valor de búsqueda (nombre, especie, estado)
+            Model model) {
+
+        List<Mascota> mascotas;
+
+        if (valorBusqueda == null || valorBusqueda.isEmpty()) {
+            mascotas = mascotaRepository.findAll();
+        } else {
+            if ("nombre".equals(criterio)) {
+                mascotas = mascotaRepository.findByNombreContainingIgnoreCase(valorBusqueda);
+            }
+            else if ("especie".equals(criterio)) {
+                mascotas = mascotaRepository.findByEspecieContainingIgnoreCase(valorBusqueda);
+            }
+            else if ("estado".equals(criterio)) {
+                int estado = Integer.parseInt(valorBusqueda);
+                mascotas = mascotaRepository.findByEstado(estado);
+            } else {
+                mascotas = mascotaRepository.findAll();
+            }
+        }
+
+        model.addAttribute("mascotas", mascotas);
+        return "listaMascotas";
+    }
+
 }

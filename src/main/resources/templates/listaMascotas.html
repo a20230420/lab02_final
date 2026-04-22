@@ -3,6 +3,25 @@
 <head><meta charset="UTF-8"><title>Listado de Mascotas</title></head>
 <body>
 <h2>Mascotas</h2>
+<form method="get" th:action="@{/mascota/buscar}">
+    <label for="criterio">Buscar por:</label>
+    <select id="criterio" name="criterio">
+        <option value="nombre">Nombre</option>
+        <option value="especie">Especie</option>
+        <option value="estado">Estado</option>
+    </select>
+
+    <label for="valorBusqueda">Valor de búsqueda:</label>
+    <input type="text" id="valorBusqueda" name="valorBusqueda" placeholder="Ingrese el valor de búsqueda">
+
+    <button type="submit">Buscar</button>
+</form>
+
+
+<form method="get" th:action="@{/mascota/buscar}">
+    <button type="submit">Limpiar filtros</button>
+</form>
+
 <table border="1" cellpadding="8">
     <tr><th>ID</th><th>Nombre</th><th>Especie</th><th>Raza</th><th>Edad</th><th>Nombre Dueño</th><th>Teléfono</th><th>Estado</th><th>Acciones</th></tr>
     <tr th:each="m : ${mascotas}">
