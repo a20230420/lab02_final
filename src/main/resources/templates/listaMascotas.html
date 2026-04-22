@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Listado de Mascotas</title></head>
+<body>
+<h2>Mascotas</h2>
+<table border="1" cellpadding="8">
+    <tr><th>ID</th><th>Nombre</th><th>Especie</th><th>Raza</th><th>Edad</th><th>Nombre Dueño</th><th>Teléfono</th><th>Estado</th><th>Acciones</th></tr>
+    <tr th:each="m : ${mascotas}">
+        <td th:text="${m.idMascota}"></td>
+        <td th:text="${m.nombre}"></td>
+        <td th:text="${m.especie}"></td>
+        <td th:text="${m.raza}"></td>
+        <td th:text="${m.edad}"></td>
+        <td th:text="${m.nombreDueno}"></td>
+        <td th:text="${m.telefono}">
+        <td th:text="${m.estado}"></td>
+        <td>
+            <a th:href="@{/mascota/edit(id=${m.idMascota})}">Editar</a> |
+            <a th:href="@{/mascota/delete(id=${m.idMascota})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
