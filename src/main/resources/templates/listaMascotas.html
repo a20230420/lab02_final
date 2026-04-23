@@ -22,6 +22,8 @@
     <button type="submit">Limpiar filtros</button>
 </form>
 
+<p><a th:href="@{/mascota/new}">Nueva mascota</a></p>
+
 <table border="1" cellpadding="8">
     <tr><th>ID</th><th>Nombre</th><th>Especie</th><th>Raza</th><th>Edad</th><th>Nombre Dueño</th><th>Teléfono</th><th>Estado</th><th>Acciones</th></tr>
     <tr th:each="m : ${mascotas}">

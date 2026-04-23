@@ -116,4 +116,32 @@ public class MascotaController {
         return "listaMascotas";
     }
 
+    @GetMapping("/new")
+    public String newMascota(Model model) {
+        model.addAttribute("mascotaForm", new MascotaForm());
+        model.addAttribute("mode","create");
+        return "formMascota";
+    }
+
+    @PostMapping("/save")
+    public String saveMascota(@ModelAttribute MascotaForm form, Model model) {
+        String error = validate(form);
+        if(error != null) {
+            model.addAttribute("error", error);
+            model.addAttribute("mode","create");
+            return "formMascota";
+        }
+
+        Mascota mascota = new Mascota();
+        mascota.setNombre(form.getNombre());
+        mascota.setEspecie(form.getEspecie());
+        mascota.setRaza(form.getRaza());
+        mascota.setEdad(form.getEdad());
+        mascota.setNombreDueno(form.getNombreDueno());
+        mascota.setTelefono(form.getTelefono());
+        mascota.setEstado((form.getEstado()));
+
+        mascotaRepository.save(mascota);
+        return "redirect:/mascota/list";
+    }
 }
