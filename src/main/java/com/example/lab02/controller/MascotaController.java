@@ -3,6 +3,7 @@ package com.example.lab02.controller;
 import com.example.lab02.dto.MascotaForm;
 import com.example.lab02.entity.Mascota;
 import com.example.lab02.repository.MascotaRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -143,5 +144,20 @@ public class MascotaController {
 
         mascotaRepository.save(mascota);
         return "redirect:/mascota/list";
+    }
+
+    @GetMapping("/reportes")
+    public String reporteMascotas(Model model) {
+        Integer maxEdad = mascotaRepository.findMaxEdad();
+        Integer minEdad = mascotaRepository.findMinEdad();
+        Double avgEdad = mascotaRepository.findAvgEdad();
+        Long cantMascotas = mascotaRepository.findTotalMascotas();
+
+        model.addAttribute("maxEdad", maxEdad);
+        model.addAttribute("minEdad", minEdad);
+        model.addAttribute("avgEdad", avgEdad);
+        model.addAttribute("cantMascotas", cantMascotas);
+
+        return "reporteMascotas";
     }
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Reporte de Mascotas</title></head>
+<body>
+<h2>Reporte general de mascotas registradas</h2>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Edad Máxima</th>
+        <th>Edad Mínima</th>
+        <th>Edad Promedio</th>
+        <th>Total de Mascotas</th>
+    </tr>
+    <tr>
+        <td th:text="${maxEdad}">0</td>
+        <td th:text="${minEdad}">0</td>
+        <td th:text="${avgEdad}">0.00</td>
+        <td th:text="${cantMascotas}">0</td>
+    </tr>
+</table>
+    <br>
+    <p><a th:href="@{/mascota/list}">Volver al listado de mascotas</a></p>
+</body>
+</html>
